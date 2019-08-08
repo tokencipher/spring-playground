@@ -27,18 +27,48 @@ public class PagesController {
     return "3.141592653589793";
   }
 
+
   @GetMapping("/math/calculate")
   public String calculate(
-          @RequestParam(required = false) String operation,
+          @RequestParam(required = false, defaultValue = "") String operation,
           @RequestParam Integer x,
           @RequestParam Integer y) {
 
     Integer result = null;
-    if (("add".equals(operation.toLowerCase()))) {
-      result = x + y;
+
+    switch (operation.toLowerCase()) {
+
+      case "add":
+        result = x + y;
+        break;
+
+      case "subtract":
+        result = x - y;
+        break;
+
+      case "multiply":
+        result = x * y;
+        break;
+
+      case "divide":
+        result = x / y;
+        break;
+
+      case "":
+        result = x + y;
+        break;
+
+      default:
+        result = x + y;
+
     }
 
     return result.toString();
+  }
+
+  @GetMapping("/vehicle")
+  public String getVehicle(@RequestParam(required = false) String type) {
+    return type;
   }
 
   // how to access querystring params
