@@ -1,11 +1,12 @@
 package com.gp;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static javax.swing.text.html.FormSubmitEvent.MethodType.GET;
 
@@ -25,6 +26,17 @@ public class PagesController {
   @GetMapping("/math/pi")
   public String getPi() {
     return "3.141592653589793";
+  }
+
+  @PostMapping("/math/sum")
+  public String calculateSum(WebRequest webRequest) {
+    Map<String, String[]> params = webRequest.getParameterMap();
+    String[] results = params.get("n");
+    int acc = 0;
+    for (int x = 0; x < results.length - 1; x++) {
+      acc += Integer.parseInt(results[x]);
+    }
+    return Integer.toString(acc);
   }
 
 
