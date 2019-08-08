@@ -28,7 +28,7 @@ public class PagesControllerTest {
     // that you'd like to send to your controller for the test such as the verb, path, and optionally
     // things like headers or the body
 
-    RequestBuilder request = MockMvcRequestBuilders.get("/app/hello");
+    RequestBuilder request = MockMvcRequestBuilders.get("/hello");
 
     this.mvc.perform(request)
             .andExpect(status().isOk());
