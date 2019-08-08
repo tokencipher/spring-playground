@@ -27,6 +27,20 @@ public class PagesController {
     return "3.141592653589793";
   }
 
+  @GetMapping("/math/calculate")
+  public String calculate(
+          @RequestParam(required = false) String operation,
+          @RequestParam Integer x,
+          @RequestParam Integer y) {
+
+    Integer result = null;
+    if (("add".equals(operation.toLowerCase()))) {
+      result = x + y;
+    }
+
+    return result.toString();
+  }
+
   // how to access querystring params
   @GetMapping("/tasks")
   public String getTaskInfo(@RequestParam String filter) {
