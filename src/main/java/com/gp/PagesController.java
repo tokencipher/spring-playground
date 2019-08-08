@@ -12,14 +12,19 @@ import static javax.swing.text.html.FormSubmitEvent.MethodType.GET;
 // Prefix all paths in a controller - In most common applications, all of the mappings in a controller are
 // prefixed with the same path. For example: /app/foo /app/bar /app/baz
 // You can easily set the prefix for an entire controller with @RequestMapping annotation on the controller class
+// Ex: @RequestMapping("/app")
 
 @RestController
-@RequestMapping("/app")
 public class PagesController {
 
   @GetMapping("/hello")
   public String sayHello() {
     return "Hello world\n";
+  }
+
+  @GetMapping("/math/pi")
+  public String getPi() {
+    return "3.141592653589793";
   }
 
   // how to access querystring params
