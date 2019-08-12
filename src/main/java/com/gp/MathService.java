@@ -1,9 +1,14 @@
 package com.gp;
 
+import org.springframework.web.context.request.WebRequest;
+
 import java.lang.String;
+import java.util.Map;
 
 public class MathService {
   private String operation;
+
+  public MathService() {}
 
   public MathService(String operation) {
     this.operation = operation;
@@ -48,6 +53,16 @@ public class MathService {
     }
 
     return null;
+  }
+
+  public Integer calculateSum(WebRequest webRequest) {
+    Map<String, String[]> params = webRequest.getParameterMap();
+    String[] results = params.get("n");
+    int acc = 0;
+    for (int x = 0; x <= results.length - 1; x++) {
+      acc += Integer.parseInt(results[x]);
+    }
+    return acc;
   }
   
 
