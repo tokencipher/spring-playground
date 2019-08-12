@@ -9,6 +9,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.MultiValueMap;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,9 +33,32 @@ public class PagesControllerTest {
     // things like headers or the body
 
     RequestBuilder request = MockMvcRequestBuilders.get("/hello");
+    this.mvc.perform(request);
+
+  }
+
+  @Test
+  public void mathSumEndpointShouldTakePostRequest() throws Exception {
+    RequestBuilder request = MockMvcRequestBuilders.post("/math/sum").param("n", "8", "7");
+    this.mvc.perform(request).andExpect(status().isOk());
+  }
+
+  @Test
+  public void mathSumEndpointShouldCalculateSum() throws Exception {
+    RequestBuilder request = MockMvcRequestBuilders.post("/math/sum").param("n", "8", "7");
+    this.mvc.perform(request).andExpect(content().string("15"));
+  }
+
+  @Test
+  public void mathCalculateEndpointShouldTakeOptionalParam() throws Exception {
+    RequestBuilder request = MockMvcRequestBuilders
+            .get("/math/calculate")
+            .param("x", "5")
+            .param("y", "5");
 
     this.mvc.perform(request)
             .andExpect(status().isOk());
   }
+
 
 }
