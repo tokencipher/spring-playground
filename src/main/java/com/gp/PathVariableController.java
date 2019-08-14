@@ -2,12 +2,19 @@ package com.gp;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 @RestController
 public class PathVariableController {
+
+  @RequestMapping("/math/volume/{length}/{width}/{height}")
+  public String getVolume(@PathVariable int length, @PathVariable int width, @PathVariable int height) {
+    int volume = length * width * height;
+    return String.format("The volume of a %dx%dx%d rectangle is %d", length, width, height, volume);
+  }
 
   // access individual path variables
   @GetMapping("/example/{q}/{from}") // matches /example/bar/foo
