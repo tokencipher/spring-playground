@@ -30,52 +30,19 @@ public class PagesController {
 
   @PostMapping("/math/sum")
   public String calculateSum(WebRequest webRequest) {
-    Map<String, String[]> params = webRequest.getParameterMap();
-    String[] results = params.get("n");
-    int acc = 0;
-    for (int x = 0; x < results.length - 1; x++) {
-      acc += Integer.parseInt(results[x]);
-    }
-    return Integer.toString(acc);
+    MathService calculator = new MathService();
+    return Integer.toString(calculator.calculateSum(webRequest));
   }
 
-
   @GetMapping("/math/calculate")
-  public String calculate(
+  public Integer calculate(
           @RequestParam(required = false, defaultValue = "") String operation,
           @RequestParam Integer x,
           @RequestParam Integer y) {
 
-    Integer result = null;
+    MathService calculator = new MathService(operation);
+    return calculator.calculate(x, y);
 
-    switch (operation.toLowerCase()) {
-
-      case "add":
-        result = x + y;
-        break;
-
-      case "subtract":
-        result = x - y;
-        break;
-
-      case "multiply":
-        result = x * y;
-        break;
-
-      case "divide":
-        result = x / y;
-        break;
-
-      case "":
-        result = x + y;
-        break;
-
-      default:
-        result = x + y;
-
-    }
-
-    return result.toString();
   }
 
   @GetMapping("/vehicle")
