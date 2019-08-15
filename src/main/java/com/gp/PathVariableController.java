@@ -16,19 +16,19 @@ public class PathVariableController {
     return String.format("The volume of a %dx%dx%d rectangle is %d", length, width, height, volume);
   }
 
-  // access individual path variables
+  // Access individual path variables
   @GetMapping("/example/{q}/{from}") // matches /example/bar/foo
   public String getIndividualParams(@PathVariable String from, @PathVariable("q") String query) {
     return String.format("q:%s from:%s", query, from);
   }
 
-  // access path variables in a map
+  // Access path variables in a map
   @GetMapping("/work/tasks/{taskId}/comments/{commentId}")
   public String getCommentsForTask(@PathVariable Map pathVariables) {
     return pathVariables.toString();
   }
 
-  // access path variables from an object
+  // Access path variables from an object
   /**
    *
    * @param ids
